@@ -1,5 +1,6 @@
 package com.example.server;
 
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -9,12 +10,18 @@ public class SocketServer {
         ServerSocket serverSocket = new ServerSocket(9000);
         Socket socket = serverSocket.accept();
 
+        StringBuffer sb = new StringBuffer();
+        sb.append("HTTP/1.1 200 OK\r\n");
+        sb.append("Content-type: text/plain\r\n");
+        sb.append("\r\n");
+        sb.append("Hello world!\r\n");
+
+        PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
+        printWriter.println(sb);
+        //전송
+        printWriter.flush();
         socket.close();
-        System.out.println("socket close");
         serverSocket.close();
-        System.out.println("serversocket close");
-        System.out.println("SocketServer close");
-        System.exit(0);
     }
 
 }
