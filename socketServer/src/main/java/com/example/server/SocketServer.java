@@ -11,13 +11,13 @@ public class SocketServer {
         Socket socket = serverSocket.accept();
 
         StringBuffer sb = new StringBuffer();
-        sb.append("HTTP/1.1 200 OK\r\n");
+        sb.append("HTTP/2 200 OK\r\n");
         sb.append("Content-type: text/plain\r\n");
         sb.append("\r\n");
         sb.append("Hello world!\r\n");
 
         PrintWriter printWriter = new PrintWriter(socket.getOutputStream());
-        printWriter.println(sb);
+        printWriter.print(sb);
         //전송
         printWriter.flush();
         socket.close();
